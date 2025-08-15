@@ -6,6 +6,7 @@ def create
   if @comment.save  
     redirect_to prototype_path(@prototype)
   else
+    @comments = @prototype.comments.includes(:user).order(created_at: :desc)
     render "prototypes/show", status: :unprocessable_entity
   end
 end
